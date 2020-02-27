@@ -6,14 +6,8 @@ import java.util.Scanner;
 public class Monney {
 		public static void main(String[] args) {
 			Scanner scan = new Scanner(System.in);
-			int sum[] = new int[10]; //개인별 매수 합계
-			int total[] = new int[10]; //총 매수 합계
-			int i; //반복문을 돌릴 변수
-			for(i=0;i<10;i++){ //전부 0으로 초기화
-				sum[i]=0;
-				total[i]=0;
-			}
 			String name; //이름을 입력받을 변수
+			int list[] = new int[5];
 			int money=0;  //출장비를 입력받을 변수
 			int T;  //출장비를 계산에 사용하기 위해 옮겨둘 변수
 			int M;  //지폐의 단위를 넣을 변수
@@ -55,14 +49,26 @@ public class Monney {
 				
 			}  
 			
-			T = money;
-			System.out.println("=================출장비지급표=================");
-		    System.out.println("성명\t지급액\t\t오만원 \t만원\t오천원\t천원");
-		    System.out.println(name +"\t"+money +"\t\t 5"+"\t 5" +"\t 0"+"\t 0");
-		    
-
-		
 			
+			T = money;
+			M = 50000;
+			for(int i = 0; i < 4; i++) {
+				list[i] = T/M;
+				T = T-(list[i]*M);
+				if(sw==1){ //지폐의 시작단위가 5라면 1로
+					M=M/5;
+					sw=0;
+
+				}else{     //지폐의 시작단위가 1이면 5로
+					M=M/2;
+					sw=1;
+					
+				}
+
+			}
+			System.out.println("=================출장비지급표=================");
+			System.out.println("성명\t지급액\t\t오만원 \t만원\t오천원\t천원");
+			System.out.println(name +"\t"+money +"\t\t"+list[0]+"\t"+list[1]+"\t"+list[2]+"\t"+list[3]);
 			
 		}
 	}	
